@@ -6,10 +6,11 @@ contributions in this repository (benchmark reports, issues #3690/#3866, PR #386
 
 ## Hardware and OS
 
+- **Machine:** Dell Precision T5610 (dual-socket Ivy Bridge workstation; mainboard 0WN7Y6, BIOS A19).
 - **GPU:** 2x NVIDIA RTX 3060 12 GB (sm_86), layer split across both (`--layer-split auto`, gpu 0+1).
   Dual-GPU on one NUMA node; PCIe link-state power management off; power/clock capped to 100 W / 300..1650 MHz per card (two different VBIOS otherwise boost asymmetrically and trip the PSU).
-- **CPU:** Xeon E5-2697 v2 (Ivy Bridge, 12c/24t per socket, **no AVX2**), 2 sockets. The no-AVX2 path is why every engine here is a source build with `STRATA_ISA_FLOOR=avx` (AVX2 prebuilts SIGILL).
-- **RAM:** 128 GB.
+- **CPU:** 2x Xeon E5-2697 v2 (Ivy Bridge, 12c/24t per socket, **no AVX2**). The no-AVX2 path is why every engine here is a source build with `STRATA_ISA_FLOOR=avx` (AVX2 prebuilts SIGILL).
+- **RAM:** 128 GB DDR3-1866, **quad-channel per socket** (8x 16 GB, DIMM1-4 on each CPU) - relevant whenever expert-cache bandwidth or CPU-decode worker counts are tuned.
 - **OS:** Windows 11. TdrDelay=30, power plan "Ultimative Leistung".
 
 ## Build (engine + vision)
